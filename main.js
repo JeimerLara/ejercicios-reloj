@@ -1,24 +1,3 @@
-class StyleLoader {
-    #href;
-
-    constructor(href) {
-        this.#href = href;
-    }
-
-    load() {
-        const exists = document.querySelector(`link[href="${this.#href}"]`);
-
-        if (exists) {
-            return;
-        }
-
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = this.#href;
-        document.head.appendChild(link);
-    }
-}
-
 class DigitalClock {
     #root;
     #timeElement;
@@ -54,11 +33,6 @@ class DigitalClock {
 
         this.#update();
         this.#intervalId = setInterval(() => this.#update(), 1000);
-    }
-
-    stop() {
-        clearInterval(this.#intervalId);
-        this.#intervalId = null;
     }
 
     #update() {
@@ -191,13 +165,9 @@ class Countdown {
 
 class ClockApp {
     #container;
-    #clock;
-    #countdown;
 
     constructor(containerId) {
         this.#container = document.getElementById(containerId);
-        this.#clock = null;
-        this.#countdown = null;
     }
 
     init() {
@@ -205,19 +175,18 @@ class ClockApp {
             throw new Error("No se encontro el contenedor principal.");
         }
 
-        new StyleLoader("style.css").load();
         this.#container.className = "app-shell";
         this.#container.replaceChildren();
 
         const nextYear = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
 
-        this.#clock = new DigitalClock(this.#container);
-        this.#countdown = new Countdown(this.#container, nextYear);
+        const clock = new DigitalClock(this.#container);
+        const countdown = new Countdown(this.#container, nextYear);
 
-        this.#clock.render();
-        this.#countdown.render();
-        this.#clock.start();
-        this.#countdown.start();
+        clock.render();
+        countdown.render();
+        clock.start();
+        countdown.start();
     }
 }
 

@@ -7,9 +7,8 @@ La interfaz se construye con JavaScript usando programacion orientada a objetos 
 ## Archivos
 
 - `index.html`: estructura base del proyecto.
-- `main.js`: logica del reloj, cuenta regresiva y carga de estilos.
-- `style.css`: archivo puente cargado desde el HTML.
-- `styles.css`: estilos principales, animaciones y transiciones.
+- `main.js`: logica del reloj y la cuenta regresiva.
+- `style.css`: estilos principales, animaciones y transiciones.
 - `DESCRIPCION.md`: explicacion detallada del proyecto.
 
 ## Caracteristicas
