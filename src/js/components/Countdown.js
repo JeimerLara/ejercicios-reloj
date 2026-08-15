@@ -1,6 +1,7 @@
 import { getTimeParts } from "../utils/date.js";
 
 const COUNTDOWN_ITEMS = [
+    ["months", "Meses"],
     ["days", "Dias"],
     ["hours", "Horas"],
     ["minutes", "Minutos"],
@@ -50,7 +51,7 @@ export class Countdown {
 
             item.append(value, text);
             grid.appendChild(item);
-            this.#items.set(key, value);
+            this.#items.set(key, { item, value });
         });
 
         section.append(title, this.#subtitleElement, grid);
@@ -79,15 +80,33 @@ export class Countdown {
             this.stop();
         }
 
-        const timeParts = getTimeParts(difference);
+        const timeParts = getTimeParts(new Date(), this.#targetDate);
+        const visibleKeys = this.#getVisibleKeys(timeParts);
 
-        Object.entries(timeParts).forEach(([key, value]) => {
-            this.#paint(key, value);
+        this.#syncVisibleItems(visibleKeys);
+
+        COUNTDOWN_ITEMS.forEach(([key]) => {
+            this.#paint(key, timeParts[key]);
+        });
+    }
+
+    #getVisibleKeys(timeParts) {
+        const firstVisibleIndex = COUNTDOWN_ITEMS.findIndex(([key]) => timeParts[key] > 0);
+        const startIndex = firstVisibleIndex === -1 ? COUNTDOWN_ITEMS.length - 1 : firstVisibleIndex;
+
+        return COUNTDOWN_ITEMS.slice(startIndex).map(([key]) => key);
+    }
+
+    #syncVisibleItems(visibleKeys) {
+        const visibleSet = new Set(visibleKeys);
+
+        this.#items.forEach(({ item }, key) => {
+            item.hidden = !visibleSet.has(key);
         });
     }
 
     #paint(key, value) {
-        const element = this.#items.get(key);
+        const element = this.#items.get(key).value;
         const text = String(value).padStart(2, "0");
 
         if (element.textContent === text) {
