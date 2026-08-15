@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    overflow-x: hidden;
+    font-family: Inter, "Segoe UI", system-ui, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 20% 20%, rgba(98, 210, 162, 0.18), transparent 32rem),
+        radial-gradient(circle at 82% 75%, rgba(244, 184, 96, 0.16), transparent 28rem),
+        linear-gradient(135deg, #111612, #24251f 52%, #171a18);
+}
+
+body::before {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    content: "";
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 58px 58px;
+    mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+    animation: gridMove 18s linear infinite;
+}
+
+h1,
+h2,
+p {
+    margin: 0;
+}
+
+h1,
+h2 {
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+h1 {
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    line-height: 0.95;
+}
+
+h2 {
+    font-size: clamp(1.7rem, 4vw, 3.25rem);
+}

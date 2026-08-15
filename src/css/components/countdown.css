@@ -1,0 +1,56 @@
+.countdown-panel {
+    min-height: 430px;
+    padding: clamp(22px, 4vw, 42px);
+    animation-delay: 120ms;
+}
+
+.countdown-subtitle {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    gap: 14px;
+    margin-top: 34px;
+}
+
+.countdown-item {
+    min-height: 140px;
+    display: grid;
+    place-items: center;
+    padding: 20px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.07);
+    transition: transform 240ms ease, border-color 240ms ease, background 240ms ease;
+}
+
+.countdown-item:hover {
+    transform: scale(1.03);
+    border-color: rgba(244, 184, 96, 0.54);
+    background: rgba(244, 184, 96, 0.1);
+}
+
+.countdown-value {
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(2.4rem, 7vw, 4.7rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent-warm);
+}
+
+.countdown-value.flip {
+    animation: flipNumber 520ms ease;
+}
+
+.countdown-label {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
