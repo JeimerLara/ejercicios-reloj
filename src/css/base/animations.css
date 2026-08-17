@@ -62,3 +62,61 @@
         background-position: 58px 58px;
     }
 }
+
+@keyframes celebratePop {
+    0% {
+        opacity: 0;
+        transform: scale(0.7) translateY(24px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.04) translateY(-4px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(244, 184, 96, 0.3), 0 0 40px rgba(98, 210, 162, 0.15);
+        border-color: rgba(244, 184, 96, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 35px rgba(98, 210, 162, 0.45), 0 0 60px rgba(244, 184, 96, 0.3);
+        border-color: rgba(98, 210, 162, 0.85);
+    }
+}
+
+@keyframes sparkleFloat {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translateY(-6px) rotate(12deg) scale(1.15);
+    }
+}
+
+@keyframes confettiFall {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0) rotate(0deg);
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(calc(var(--x-end, 0vw) - var(--x-start, 0vw)), 105vh, 0) rotate(720deg);
+    }
+}
+

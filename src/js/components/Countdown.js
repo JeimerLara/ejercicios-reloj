@@ -1,4 +1,5 @@
 import { getTimeParts } from "../utils/date.js";
+import { launchConfetti, createCelebrationBanner } from "../utils/celebration.js";
 
 const COUNTDOWN_ITEMS = [
     ["months", "Meses"],
@@ -14,6 +15,9 @@ export class Countdown {
     #items;
     #intervalId;
     #subtitleElement;
+    #containerSection;
+    #bannerElement;
+    #isFinished;
 
     constructor(root, targetDate) {
         this.#root = root;
@@ -21,6 +25,9 @@ export class Countdown {
         this.#items = new Map();
         this.#intervalId = null;
         this.#subtitleElement = document.createElement("p");
+        this.#containerSection = null;
+        this.#bannerElement = null;
+        this.#isFinished = false;
     }
 
     render() {
@@ -56,6 +63,7 @@ export class Countdown {
 
         section.append(title, this.#subtitleElement, grid);
         this.#root.appendChild(section);
+        this.#containerSection = section;
     }
 
     start() {
@@ -72,11 +80,26 @@ export class Countdown {
         this.#intervalId = null;
     }
 
+    setTargetDate(targetDate) {
+        this.#targetDate = targetDate;
+        this.#isFinished = false;
+        if (this.#bannerElement) {
+            this.#bannerElement.remove();
+            this.#bannerElement = null;
+        }
+        this.#subtitleElement.textContent = "Tiempo restante para iniciar el proximo año";
+        this.start();
+    }
+
     #update() {
         const difference = Math.max(this.#targetDate.getTime() - Date.now(), 0);
 
         if (difference === 0) {
-            this.#subtitleElement.textContent = "El nuevo año ya inicio";
+            this.#subtitleElement.textContent = "🎉 ¡El año nuevo ya inició! 🥂";
+            if (!this.#isFinished) {
+                this.#isFinished = true;
+                this.#showCelebration();
+            }
             this.stop();
         }
 
@@ -88,6 +111,14 @@ export class Countdown {
         COUNTDOWN_ITEMS.forEach(([key]) => {
             this.#paint(key, timeParts[key]);
         });
+    }
+
+    #showCelebration() {
+        if (!this.#bannerElement && this.#containerSection) {
+            this.#bannerElement = createCelebrationBanner(this.#targetDate.getFullYear());
+            this.#containerSection.appendChild(this.#bannerElement);
+            launchConfetti(50);
+        }
     }
 
     #getVisibleKeys(timeParts) {

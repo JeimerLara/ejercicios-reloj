@@ -1,4 +1,5 @@
 import { getTotalTimeParts } from "../utils/date.js";
+import { createCelebrationBanner } from "../utils/celebration.js";
 
 const TOTAL_ITEMS = [
     ["days", "Días"],
@@ -15,6 +16,9 @@ export class TotalCountdown {
     #items;
     #intervalId;
     #subtitleElement;
+    #containerSection;
+    #bannerElement;
+    #isFinished;
 
     constructor(root, targetDate) {
         this.#root = root;
@@ -22,6 +26,9 @@ export class TotalCountdown {
         this.#items = new Map();
         this.#intervalId = null;
         this.#subtitleElement = document.createElement("p");
+        this.#containerSection = null;
+        this.#bannerElement = null;
+        this.#isFinished = false;
     }
 
     render() {
@@ -57,6 +64,7 @@ export class TotalCountdown {
 
         section.append(title, this.#subtitleElement, grid);
         this.#root.appendChild(section);
+        this.#containerSection = section;
     }
 
     start() {
@@ -73,11 +81,26 @@ export class TotalCountdown {
         this.#intervalId = null;
     }
 
+    setTargetDate(targetDate) {
+        this.#targetDate = targetDate;
+        this.#isFinished = false;
+        if (this.#bannerElement) {
+            this.#bannerElement.remove();
+            this.#bannerElement = null;
+        }
+        this.#subtitleElement.textContent = `Total acumulado hacia el ${this.#targetDate.getFullYear()}`;
+        this.start();
+    }
+
     #update() {
         const difference = Math.max(this.#targetDate.getTime() - Date.now(), 0);
 
         if (difference === 0) {
-            this.#subtitleElement.textContent = "El nuevo año ya inicio";
+            this.#subtitleElement.textContent = "🎉 ¡El año nuevo ya inició! 🥂";
+            if (!this.#isFinished) {
+                this.#isFinished = true;
+                this.#showCelebration();
+            }
             this.stop();
         }
 
@@ -86,6 +109,13 @@ export class TotalCountdown {
         TOTAL_ITEMS.forEach(([key]) => {
             this.#paint(key, timeParts[key]);
         });
+    }
+
+    #showCelebration() {
+        if (!this.#bannerElement && this.#containerSection) {
+            this.#bannerElement = createCelebrationBanner(this.#targetDate.getFullYear());
+            this.#containerSection.appendChild(this.#bannerElement);
+        }
     }
 
     #paint(key, value) {
