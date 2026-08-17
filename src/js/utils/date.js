@@ -56,3 +56,31 @@ function addMonths(date, months) {
 
     return result;
 }
+
+export function getTotalTimeParts(startDate, targetDate) {
+    const start = new Date(startDate);
+    const target = new Date(targetDate);
+
+    if (target <= start) {
+        return {
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+        };
+    }
+
+    const remainingMilliseconds = target.getTime() - start.getTime();
+    const totalSeconds = Math.floor(remainingMilliseconds / 1000);
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const totalHours = Math.floor(totalMinutes / 60);
+    const totalDays = Math.floor(totalHours / 24);
+
+    return {
+        days: totalDays,
+        hours: totalHours,
+        minutes: totalMinutes,
+        seconds: totalSeconds,
+    };
+}
+

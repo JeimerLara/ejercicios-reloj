@@ -1,5 +1,6 @@
 import { Countdown } from "../components/Countdown.js";
 import { DigitalClock } from "../components/DigitalClock.js";
+import { TotalCountdown } from "../components/TotalCountdown.js";
 import { getNextYearDate } from "../utils/date.js";
 
 export class ClockApp {
@@ -17,12 +18,18 @@ export class ClockApp {
         this.#container.className = "app-shell";
         this.#container.replaceChildren();
 
+        const targetDate = getNextYearDate();
         const clock = new DigitalClock(this.#container);
-        const countdown = new Countdown(this.#container, getNextYearDate());
+        const countdown = new Countdown(this.#container, targetDate);
+        const totalCountdown = new TotalCountdown(this.#container, targetDate);
 
         clock.render();
         countdown.render();
+        totalCountdown.render();
+
         clock.start();
         countdown.start();
+        totalCountdown.start();
     }
 }
+

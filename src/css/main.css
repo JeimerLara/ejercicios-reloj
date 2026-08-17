@@ -4,5 +4,6 @@
 @import url("./components/panel.css");
 @import url("./components/clock.css");
 @import url("./components/countdown.css");
+@import url("./components/total-countdown.css");
 @import url("./base/animations.css");
 @import url("./base/responsive.css");

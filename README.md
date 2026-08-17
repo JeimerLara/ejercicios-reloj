@@ -21,14 +21,16 @@ La aplicacion esta organizada por modulos para que sea mas facil mantenerla y es
     │   ├── components
     │   │   ├── clock.css
     │   │   ├── countdown.css
-    │   │   └── panel.css
+    │   │   ├── panel.css
+    │   │   └── total-countdown.css
     │   └── layout
     │       └── app.css
     └── js
         ├── main.js
         ├── components
         │   ├── Countdown.js
-        │   └── DigitalClock.js
+        │   ├── DigitalClock.js
+        │   └── TotalCountdown.js
         ├── core
         │   └── ClockApp.js
         └── utils
@@ -40,17 +42,20 @@ La aplicacion esta organizada por modulos para que sea mas facil mantenerla y es
 - `src/js/main.js`: punto de entrada de la aplicacion.
 - `src/js/core/ClockApp.js`: inicializa la aplicacion y conecta los componentes.
 - `src/js/components/DigitalClock.js`: renderiza y actualiza el reloj digital.
-- `src/js/components/Countdown.js`: renderiza y actualiza la cuenta regresiva.
+- `src/js/components/Countdown.js`: renderiza y actualiza la cuenta regresiva desglosada.
+- `src/js/components/TotalCountdown.js`: renderiza y actualiza el tiempo restante acumulado en días, horas, minutos y segundos.
 - `src/js/utils/date.js`: funciones reutilizables para calculos de fechas.
 - `src/css/main.css`: punto de entrada de estilos.
 
 ## Caracteristicas
 
 - Reloj digital actualizado cada segundo.
-- Cuenta regresiva hacia el 1 de enero del proximo año.
+- Cuenta regresiva desglosada hacia el 1 de enero del proximo año.
+- Panel de tiempo restante acumulado simultáneo en días, horas, minutos y segundos sin desglosar.
+- Formato numérico con separadores de miles y animaciones de actualización.
 - JavaScript separado por responsabilidades.
 - CSS separado por base, layout y componentes.
-- Animaciones en los numeros del reloj y la cuenta regresiva.
+- Animaciones en los numeros del reloj y cuentas regresivas.
 - Diseno adaptable para escritorio y movil.
 
 ## Como ejecutar
@@ -76,5 +81,6 @@ node --check src/js/main.js
 node --check src/js/core/ClockApp.js
 node --check src/js/components/DigitalClock.js
 node --check src/js/components/Countdown.js
+node --check src/js/components/TotalCountdown.js
 node --check src/js/utils/date.js
 ```
