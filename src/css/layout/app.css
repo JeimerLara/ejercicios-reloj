@@ -1,9 +1,24 @@
 .app-shell {
-    width: min(1400px, calc(100vw - 32px));
-    min-height: min(680px, calc(100vh - 32px));
+    width: min(1200px, calc(100vw - 32px));
+    margin: 24px auto;
     display: grid;
-    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "clock clock"
+        "countdown total";
     gap: 24px;
     align-items: stretch;
     padding: 24px;
+}
+
+.clock-panel {
+    grid-area: clock;
+}
+
+.countdown-panel {
+    grid-area: countdown;
+}
+
+.total-panel {
+    grid-area: total;
 }

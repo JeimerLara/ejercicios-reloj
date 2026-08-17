@@ -1,14 +1,19 @@
 .clock-panel {
-    min-height: 430px;
-    padding: clamp(24px, 5vw, 52px);
+    min-height: 220px;
+    padding: clamp(24px, 4vw, 36px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .clock-time {
-    margin-top: 34px;
+    margin-top: 18px;
     font-variant-numeric: tabular-nums;
-    font-size: clamp(3rem, 10vw, 5.4rem);
+    font-size: clamp(3rem, 4vw, 5.2rem);
     font-weight: 900;
-    line-height: 0.92;
+    line-height: 0.95;
     color: var(--accent);
     text-shadow: 0 0 30px rgba(98, 210, 162, 0.32);
 }
@@ -19,7 +24,7 @@
 
 .clock-date {
     max-width: 32rem;
-    margin-top: 20px;
+    margin-top: 14px;
     color: var(--muted);
     font-size: clamp(1rem, 2vw, 1.25rem);
     text-transform: capitalize;
