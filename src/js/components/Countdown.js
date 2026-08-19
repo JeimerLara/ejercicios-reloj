@@ -2,6 +2,7 @@ import { getTimeParts } from "../utils/date.js";
 import { launchConfetti, createCelebrationBanner } from "../utils/celebration.js";
 
 const COUNTDOWN_ITEMS = [
+    ["years", "Años"],
     ["months", "Meses"],
     ["days", "Dias"],
     ["hours", "Horas"],

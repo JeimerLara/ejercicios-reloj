@@ -8,6 +8,7 @@ export function getTimeParts(startDate, targetDate) {
 
     if (target <= start) {
         return {
+            years: 0,
             months: 0,
             days: 0,
             hours: 0,
@@ -16,15 +17,18 @@ export function getTimeParts(startDate, targetDate) {
         };
     }
 
-    let months = (target.getFullYear() - start.getFullYear()) * 12;
-    months += target.getMonth() - start.getMonth();
+    let totalMonths = (target.getFullYear() - start.getFullYear()) * 12;
+    totalMonths += target.getMonth() - start.getMonth();
 
-    let cursor = addMonths(start, months);
+    let cursor = addMonths(start, totalMonths);
 
     if (cursor > target) {
-        months -= 1;
-        cursor = addMonths(start, months);
+        totalMonths -= 1;
+        cursor = addMonths(start, totalMonths);
     }
+
+    const years = Math.floor(totalMonths / 12);
+    const months = totalMonths % 12;
 
     const remainingMilliseconds = target.getTime() - cursor.getTime();
     const totalSeconds = Math.floor(remainingMilliseconds / 1000);
@@ -36,6 +40,7 @@ export function getTimeParts(startDate, targetDate) {
     const days = Math.floor(totalHours / 24);
 
     return {
+        years,
         months,
         days,
         hours,

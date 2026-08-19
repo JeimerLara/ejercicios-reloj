@@ -105,6 +105,9 @@ export class TotalCountdown {
         }
 
         const timeParts = getTotalTimeParts(new Date(), this.#targetDate);
+        const visibleKeys = this.#getVisibleKeys(timeParts);
+
+        this.#syncVisibleItems(visibleKeys);
 
         TOTAL_ITEMS.forEach(([key]) => {
             this.#paint(key, timeParts[key]);
@@ -116,6 +119,21 @@ export class TotalCountdown {
             this.#bannerElement = createCelebrationBanner(this.#targetDate.getFullYear());
             this.#containerSection.appendChild(this.#bannerElement);
         }
+    }
+
+    #getVisibleKeys(timeParts) {
+        const firstVisibleIndex = TOTAL_ITEMS.findIndex(([key]) => timeParts[key] > 0);
+        const startIndex = firstVisibleIndex === -1 ? TOTAL_ITEMS.length - 1 : firstVisibleIndex;
+
+        return TOTAL_ITEMS.slice(startIndex).map(([key]) => key);
+    }
+
+    #syncVisibleItems(visibleKeys) {
+        const visibleSet = new Set(visibleKeys);
+
+        this.#items.forEach(({ item }, key) => {
+            item.hidden = !visibleSet.has(key);
+        });
     }
 
     #paint(key, value) {
