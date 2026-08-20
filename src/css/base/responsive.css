@@ -18,7 +18,8 @@
     }
 
     .countdown-panel,
-    .total-panel {
+    .total-panel,
+    .final-panel {
         min-height: 360px;
     }
 }

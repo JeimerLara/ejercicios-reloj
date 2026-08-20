@@ -22,3 +22,7 @@
 .total-panel {
     grid-area: total;
 }
+
+.final-panel {
+    grid-column: 1 / -1;
+}

@@ -120,3 +120,66 @@
     }
 }
 
+@keyframes intensePulse {
+    0% {
+        transform: scale(1);
+        filter: brightness(1) drop-shadow(0 0 12px rgba(255, 107, 107, 0.4));
+    }
+
+    35% {
+        transform: scale(1.16);
+        filter: brightness(1.6) drop-shadow(0 0 45px rgba(255, 107, 107, 0.95));
+    }
+
+    70% {
+        transform: scale(1.04);
+        filter: brightness(1.2) drop-shadow(0 0 25px rgba(244, 184, 96, 0.7));
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1) drop-shadow(0 0 12px rgba(255, 107, 107, 0.4));
+    }
+}
+
+@keyframes shockwave {
+    0% {
+        transform: scale(0.97);
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.65);
+    }
+
+    65% {
+        transform: scale(1.03);
+        box-shadow: 0 0 0 28px rgba(255, 107, 107, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+    }
+}
+
+@keyframes urgentShake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-3px) rotate(-1deg);
+    }
+
+    40% {
+        transform: translateX(3px) rotate(1deg);
+    }
+
+    60% {
+        transform: translateX(-2px);
+    }
+
+    80% {
+        transform: translateX(2px);
+    }
+}
+
+

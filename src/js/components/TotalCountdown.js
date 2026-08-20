@@ -92,6 +92,12 @@ export class TotalCountdown {
         this.start();
     }
 
+    setVisible(visible) {
+        if (this.#containerSection) {
+            this.#containerSection.hidden = !visible;
+        }
+    }
+
     #update() {
         const difference = Math.max(this.#targetDate.getTime() - Date.now(), 0);
 
